@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
+from Flask import jsonify
 from urllib import request
 
 app = FastAPI()
@@ -40,7 +41,9 @@ def predict_accidents(input_parameters : model_input):
     input_list = [[cat, acc, year, month]]
 
     result = model.predict(input_list)
+        
+    response = {'predictions': result}
+    return jsonify(response)
 
-    return result
 
 
