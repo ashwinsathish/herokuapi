@@ -18,31 +18,29 @@ app.add_middleware(
         allow_headers=["*"]
     )
 
-class model_input(BaseModel):
-    Category_code : int
-    Acc_type_code : int
-    Year : int
-    Month : int
-
 model = pickle.load(open('xgb_pred_model.pkl','rb'))
 
 @app.post('/accident_prediction')
 
-def predict_accidents(input_parameters : model_input):
-
-    input_data = input_parameters.json()
-    input_dictionary = json.loads(input_data)
-
-    cat = input_dictionary['Category_code']
-    acc = input_dictionary['Acc_type_code']
-    year = input_dictionary['Year']
-    month = input_dictionary['Month']
-
-    input_list = [[cat, acc, year, month]]
-
-    result = model.predict(input_list)
+def predict_accidents():
         
-    return result
+    data = request.get_json()
+
+    # Extract the values for each feature
+    category_code = data['category_code']
+    acc_type_code = data['accident_type_code']
+    year = data['year']
+    month = data['month']
+
+    input_list = [[category_code, acc_type_code, year, month]]
+
+    prediction = model.predict(input_list)
+
+    # Return the prediction as a JSON object
+    response = {'predictions': prediction.tolist()}
+    return jsonify(response)
+
+     
 
 
 
