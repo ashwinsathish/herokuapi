@@ -4,8 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 from urllib import request
-import numpy as np
-import pandas as pd
 
 app = FastAPI()
 
