@@ -39,7 +39,7 @@ def predict_accidents(input_parameters : model_input):
     year = input_dictionary['Year']
     month = input_dictionary['Month']
 
-    input_list = [cat, acc, year, month]
+    input_list = [[cat, acc, year, month]]
 
     result = model.predict(input_list)
 
