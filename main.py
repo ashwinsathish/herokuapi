@@ -42,8 +42,7 @@ def predict_accidents(input_parameters : model_input):
 
     result = model.predict(input_list)
         
-    response = {'predictions': result}
-    return jsonify(response)
+    return result
 
 
 
