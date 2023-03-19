@@ -40,8 +40,12 @@ def predict_accidents(input_parameters : model_input):
 
     input_list = [cat, acc, year, month]
 
-    result = model.predict(input_list)
-    return jsonify(result)
+    result = model.predict([input_list])
+    response = {'predictions': result.tolist()}
+    return jsonify(response)
+
+    
+
 
 
 
