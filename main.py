@@ -41,10 +41,9 @@ def predict_accidents(input_parameters : model_input):
     input_list = [cat, acc, year, month]
 
     result = model.predict(input_list)
-    return jsonify(response)
+    return jsonify(result)
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080, debug=True)
+
 
      
 
